@@ -2,6 +2,7 @@
 
 const bar_count = 50;
 const bar_max = 100;
+const bar_min = 5;
 const bar_width = '1rem';
 
 class Bar {
@@ -18,7 +19,7 @@ class Graph {
 
     constructor(bar_count) {
         for (let i = 0; i < bar_count; i++) {
-            let bar = new Bar(Math.floor(Math.random() * bar_max),
+            let bar = new Bar((Math.floor(Math.random() * (bar_max - bar_min + 1)) + bar_min),
                               bar_width,
                               getComputedStyle(document.documentElement).getPropertyValue('--color-bars'));
             Graph.bars.push(bar);
