@@ -1,11 +1,11 @@
 
 
-const bar_count = 50;
+export const bar_count = 50;
 const bar_max = 100;
 const bar_min = 5;
 const bar_width = '1rem';
 
-class Bar {
+export class Bar {
     constructor(height, width, color) {
         this.height = height;
         this.width = width;
@@ -14,9 +14,7 @@ class Bar {
 }
 
 class Graph {
-
     static bars = [];
-
     constructor(bar_count) {
         for (let i = 0; i < bar_count; i++) {
             let bar = new Bar((Math.floor(Math.random() * (bar_max - bar_min + 1)) + bar_min),
@@ -30,14 +28,24 @@ class Graph {
         
         const graph = document.getElementById('graph');
 
+        graph.innerHTML = '';
+
         for (let i = 0; i < bar_count; i++) {
             const div = document.createElement('div');
             div.classList.add("bar");
             div.style.height = Graph.bars[i].height + '%';
             div.style.width = Graph.bars[i].width;
-            div.style.color = Graph.bars[i].color;
+            div.style.backgroundColor = Graph.bars[i].color;
             graph.appendChild(div);
         }
+    }
+
+    getBars() {
+        return Graph.bars;
+    }
+
+    setBars(index, value) {
+        Graph.bars[index] = value;
     }
 
     readBars() {
@@ -48,6 +56,5 @@ class Graph {
 
 }
 
-
-let myGraph = new Graph(bar_count);
-myGraph.updateHTML();
+export let graph = new Graph(bar_count);
+graph.updateHTML();
